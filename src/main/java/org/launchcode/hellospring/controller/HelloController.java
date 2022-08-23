@@ -19,9 +19,25 @@ public class HelloController {
         return "Goodbye, Spring!";
     }
 
+//    @RequestMapping(method={RequestMethod.GET, RequestMethod.POST})
+//    public String helloWithQueryParam(@RequestParam String name){
+//        return "Hello, " + name + "!";
+//    }
     @RequestMapping(method={RequestMethod.GET, RequestMethod.POST})
-    public String helloWithQueryParam(@RequestParam String name){
-        return "Hello, " + name + "!";
+    public String createMessage(@RequestParam String name, @RequestParam String language){
+        String greeting = "";
+        if(language.equals("English")){
+            greeting = "Hello";
+        } else if(language.equals("German")){
+            greeting = "Hallo";
+        }else if(language.equals("Italian")){
+            greeting = "Ciao";
+        }else if(language.equals("Spanish")){
+            greeting = "Hola";
+        }else if(language.equals("Finnish")){
+            greeting = "Hei";
+        }
+        return greeting + ", " + name + "!";
     }
 
     @GetMapping("{name}")
@@ -36,6 +52,12 @@ public class HelloController {
                         "<body>" +
                         "<form method = 'post' action='/hello'>" +
                         "<input type = 'text' name='name' />" +
+                        "<select name='language' id='language-select'>" +
+                        "<option value='English'>English</option>" +
+                        "<option value='German'>German</option>" +
+                        "<option value='Italian'>Italian</option>" +
+                        "<option value='Spanish'>Spanish</option>" +
+                        "<option value='Finnish'>Finnish</option>" +
                         "<input type = 'submit' value='Greet Me!'/>" +
                         "</form>" +
                         "</body>" +
